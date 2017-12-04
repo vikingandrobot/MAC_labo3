@@ -1,9 +1,5 @@
-package ch.heigvd.university;
+package ch.heigvd.university.entity;
 
-/**
- *
- * @author User
- */
 public class Cours {
 
    private int id;
