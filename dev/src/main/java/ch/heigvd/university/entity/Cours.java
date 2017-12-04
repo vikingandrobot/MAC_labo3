@@ -1,4 +1,4 @@
-package ch.heigvd.university;
+package ch.heigvd.university.entity;
 
 public class Cours {
 
