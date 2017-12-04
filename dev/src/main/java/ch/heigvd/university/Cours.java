@@ -1,9 +1,5 @@
 package ch.heigvd.university;
 
-/**
- *
- * @author User
- */
 public class Cours {
 
    private int id;
