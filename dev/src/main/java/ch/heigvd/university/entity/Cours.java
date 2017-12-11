@@ -1,9 +1,24 @@
 package ch.heigvd.university.entity;
 
-public class Cours {
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "cours")
+public class Cours implements java.io.Serializable {
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
+
+   @Column(name = "titre", nullable = false, length = 45)
    private String titre;
+
+   @Column(name = "credits", nullable = false)
    private int credits;
 
    public Cours() {
@@ -25,8 +40,6 @@ public class Cours {
    public void setCredits(int credits) {
       this.credits = credits;
    }
-   
-   
 
    public int getCredits() {
       return credits;
@@ -38,6 +51,5 @@ public class Cours {
 
    public int getId() {
       return id;
-   } 
-   
+   }
 }
