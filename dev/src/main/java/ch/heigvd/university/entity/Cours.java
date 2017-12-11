@@ -14,6 +14,20 @@ public class Cours {
       this.credits = credits;
    }
 
+   public void setId(int id) {
+      this.id = id;
+   }
+
+   public void setTitre(String titre) {
+      this.titre = titre;
+   }
+
+   public void setCredits(int credits) {
+      this.credits = credits;
+   }
+   
+   
+
    public int getCredits() {
       return credits;
    }

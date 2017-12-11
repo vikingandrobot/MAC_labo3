@@ -4,7 +4,7 @@
    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
    
 <hibernate-mapping>
-   <class name="Etudiant" table="etudiants">
+   <class name="ch.heigvd.university.entity.Etudiant" table="etudiants">
       <id name="id" type="int" column ="id">
          <generator class="native"/>
       </id>

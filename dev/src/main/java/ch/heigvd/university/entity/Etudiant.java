@@ -9,6 +9,22 @@ public class Etudiant {
    
    public Etudiant(){}
 
+   public void setId(int id) {
+      this.id = id;
+   }
+
+   public void setPrenom(String prenom) {
+      this.prenom = prenom;
+   }
+
+   public void setNom(String nom) {
+      this.nom = nom;
+   }
+
+   public void setDateInscription(Date dateInscription) {
+      this.dateInscription = dateInscription;
+   }
+
    public Etudiant(String prenom, String nom, Date dateInscription) {
       this.prenom = prenom;
       this.nom = nom;
