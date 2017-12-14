@@ -2,6 +2,8 @@ package ch.heigvd.university;
 
 import ch.heigvd.university.entity.Cours;
 import ch.heigvd.university.entity.Etudiant;
+import ch.heigvd.university.entity.Inscription;
+import org.hibernate.cfg.AnnotationConfiguration;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
@@ -22,6 +24,7 @@ class App {
     */
    private static void createData() {
       // Open a new session and begin a new transaction
+      
       Session session = sessionFactory.openSession();
       session.beginTransaction();
 
@@ -80,10 +83,18 @@ class App {
     * @param args
     */
    public static void main(String... args) {
-      sessionFactory = new Configuration()
-              .configure()
-              .buildSessionFactory();
-
+       try {
+        sessionFactory = new AnnotationConfiguration()
+                   .configure()
+                   //addPackage("com.xyz") //add package if used.
+                   .addAnnotatedClass(Cours.class)
+                   .addAnnotatedClass(Etudiant.class)
+                   .addAnnotatedClass(Inscription.class)
+                   .buildSessionFactory();
+      } catch (Throwable ex) { 
+         System.err.println("Failed to create sessionFactory object." + ex);
+         throw new ExceptionInInitializerError(ex); 
+      }
       // Test program that creates students and courses and then displays them
       createData();
       readData();
