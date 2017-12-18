@@ -93,5 +93,7 @@ class App {
       // Test program that creates students and courses and then displays them
       createData();
       readData();
+      
+      sessionFactory.close();
    }
 }
