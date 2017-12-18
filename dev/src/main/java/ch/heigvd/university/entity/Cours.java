@@ -1,9 +1,14 @@
 package ch.heigvd.university.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Cours implements java.io.Serializable {
@@ -15,6 +20,10 @@ public class Cours implements java.io.Serializable {
    private String titre;
 
    private int credits;
+   
+   @OneToMany(targetEntity=Inscription.class, fetch= FetchType.LAZY,
+           cascade={CascadeType.ALL},mappedBy="etudiant")
+   private Set<Inscription> inscriptions = new HashSet();
 
    public Cours() {
    }
@@ -46,5 +55,13 @@ public class Cours implements java.io.Serializable {
 
    public int getId() {
       return id;
+   }
+   
+   public Set<Etudiant> getEtudiants(){
+       Set<Etudiant> etudiants = new HashSet();
+       for(Inscription ins : inscriptions){
+           etudiants.add(ins.getEtudiant());
+       }
+       return etudiants;
    }
 }

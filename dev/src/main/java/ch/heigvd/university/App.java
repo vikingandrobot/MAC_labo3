@@ -4,6 +4,7 @@ import ch.heigvd.university.entity.Cours;
 import ch.heigvd.university.entity.Etudiant;
 import ch.heigvd.university.entity.Inscription;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,17 +25,25 @@ class App {
    private static void createData() {
       // Open a new session and begin a new transaction
       
+      List<Etudiant> etudiants = new LinkedList<>();
+      List<Cours> cours = new LinkedList<>();
+      
       Session session = sessionFactory.openSession();
       session.beginTransaction();
 
       // Create a bunch of students and courses
       for (int i = 0; i < 3; ++i) {
-         Etudiant etudiant = new Etudiant(PRENOMS[i], NOMS[i], new Date());
-         session.save(etudiant);
+         etudiants.add(new Etudiant(PRENOMS[i], NOMS[i], new Date()));
+         session.save(etudiants.get(i));
 
-         Cours cours = new Cours(COURS[i], (i + 1) * 2);
-         session.save(cours);
+         cours.add(new Cours(COURS[i], (i + 1) * 2));
+         session.save(cours.get(i));
       }
+      
+      etudiants.get(0).ajouterCours(cours.get(0));
+      etudiants.get(0).ajouterCours(cours.get(1));
+      etudiants.get(0).ajouterCours(cours.get(2));
+      etudiants.get(1).ajouterCours(cours.get(1));    
 
       // Commit the transaction and close the session
       session.getTransaction().commit();
@@ -69,7 +78,17 @@ class App {
       for (String titre : list) {
          System.out.println(titre);
       }
-
+      
+      System.out.println("Afficher les étudiants et leurs cours");
+        List listEtudiants = session.createQuery("FROM Etudiant").list();
+        for(Object e : listEtudiants){
+            System.out.println("Etudiant : " + ((Etudiant)e).getNom()+" " + ((Etudiant)e).getPrenom());
+            for(Cours c : ((Etudiant)e).getCours()){
+                System.out.println("cours : " + c);
+            }       
+        }
+    
+     
       // Commit the transaction and close the session
       session.getTransaction().commit();
       session.close();

@@ -1,9 +1,14 @@
 package ch.heigvd.university.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Inscription implements java.io.Serializable {
@@ -12,37 +17,41 @@ public class Inscription implements java.io.Serializable {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private long id;
 
-   private int coursId;
+   @ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="cours_id", nullable = true)
+   private Cours cours;
 
-   private int etudiantId;
+   @ManyToOne(fetch= FetchType.LAZY)
+   @JoinColumn(name="etudiant_id", nullable=true)
+   private Etudiant etudiant;
 
    public Inscription() {
    }
 
-   public Inscription(int coursId, int etudiantId) {
-      this.coursId = coursId;
-      this.etudiantId = etudiantId;
+   public Inscription(Cours cours, Etudiant etudiant) {
+      this.cours = cours;
+      this.etudiant = etudiant;
    }
    
-   public int getCoursId() {
-      return coursId;
+   public Cours getCours() {
+      return cours;
    }
 
-   public int getEtudiantId() {
-      return etudiantId;
+   public Etudiant getEtudiant() {
+      return etudiant;
    }
 
    public long getId() {
       return id;
    }
 
-   public void setCoursId(int coursId) {
-      this.coursId = coursId;
-   }
+    public void setCours(Cours cours) {
+        this.cours = cours;
+    }
 
-   public void setEtudiantId(int etudiantId) {
-      this.etudiantId = etudiantId;
-   }
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
+    }
 
    public void setId(long id) {
       this.id = id;
