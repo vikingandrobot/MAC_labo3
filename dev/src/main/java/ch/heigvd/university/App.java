@@ -84,7 +84,7 @@ class App {
         for(Object e : listEtudiants){
             System.out.println("Etudiant : " + ((Etudiant)e).getNom()+" " + ((Etudiant)e).getPrenom());
             for(Cours c : ((Etudiant)e).getCours()){
-                System.out.println("cours : " + c);
+                System.out.println("cours : " + c.getTitre());
             }       
         }
     
