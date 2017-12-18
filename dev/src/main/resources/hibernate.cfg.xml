@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
- <hibernate-configuration> 
-     <!-- Paramètres de la connexion à la base de données -->
-    <property name="connection.driver_class"> com.mysql.jdbc.Driver</property>
-    <property name="connection.url">jdbc:mysql://localhost:3306/Universite?</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">root</property>
-    <property name="connection.pool_size">1</property>
-    <!-- Type de SGBD -->
-    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-    <!-- Pour supprimer et recréer le schéma de BD au lancement -->
-    <property name="hbm2ddl.auto">create</property>
-    <!-- Pour afficher les requêtes SQL en console (debugging) -->
-    <property name="show_sql">true</property>
+<hibernate-configuration> 
     
-     <session-factory>
-        <mapping class="Cours"/>    
-        <mapping class="Etudiant"/>     
-        <mapping class="Inscription"/>     
-     </session-factory> 
- </hibernate-configuration>
+   <session-factory>
+        
+      <!-- Paramètres de la connexion à la base de données -->
+      <property name="connection.driver_class"> com.mysql.jdbc.Driver</property>
+      <property name="connection.url">jdbc:mysql://localhost:3306/Universite?</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">root</property>
+      <property name="connection.pool_size">1</property>
+      <!-- Type de SGBD -->
+      <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+      <!-- Pour supprimer et recréer le schéma de BD au lancement -->
+      <property name="hbm2ddl.auto">create</property>
+      <!-- Pour afficher les requêtes SQL en console (debugging) -->
+      <property name="show_sql">true</property>
+   
+      <mapping class="ch.heigvd.university.entity.Cours"/>    
+      <mapping class="ch.heigvd.university.entity.Etudiant"/>     
+      <mapping class="ch.heigvd.university.entity.Inscription"/>     
+   </session-factory> 
+</hibernate-configuration>
