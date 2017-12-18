@@ -2,11 +2,11 @@ package ch.heigvd.university;
 
 import ch.heigvd.university.entity.Cours;
 import ch.heigvd.university.entity.Etudiant;
-import ch.heigvd.university.entity.Inscription;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.Query;
+import javax.persistence.TypedQuery;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -27,7 +27,7 @@ class App {
       
       List<Etudiant> etudiants = new LinkedList<>();
       List<Cours> cours = new LinkedList<>();
-      
+
       Session session = sessionFactory.openSession();
       session.beginTransaction();
 
@@ -60,8 +60,8 @@ class App {
       session.beginTransaction();
 
       // Query the name of the students and display them
-      Query query = session.createQuery("select p.nom from Etudiant as p");
-      List<String> list = query.list();
+      TypedQuery<String> query = session.createQuery("select p.nom from Etudiant as p");
+      List<String> list = query.getResultList();
 
       System.out.println("Affichage des étudiants: ");
       for (String nom : list) {
@@ -72,7 +72,7 @@ class App {
 
       // Query the title of the courses and display them
       query = session.createQuery("select c.titre from Cours as c");
-      list = query.list();
+      list = query.getResultList();
 
       System.out.println("Affichage des cours: ");
       for (String titre : list) {
@@ -101,16 +101,19 @@ class App {
     * @param args
     */
    public static void main(String... args) {
-       try {
-        sessionFactory = new Configuration()
-                   .configure()
-                   .buildSessionFactory();
-      } catch (Throwable ex) { 
+      try {
+         sessionFactory = new Configuration()
+                 .configure()
+                 .buildSessionFactory();
+      } catch (HibernateException ex) {
          System.err.println("Failed to create sessionFactory object." + ex);
-         throw new ExceptionInInitializerError(ex); 
+         throw new ExceptionInInitializerError(ex);
       }
+      
       // Test program that creates students and courses and then displays them
       createData();
       readData();
+
+      sessionFactory.close();
    }
 }
