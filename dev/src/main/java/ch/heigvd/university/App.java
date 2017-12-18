@@ -24,7 +24,6 @@ class App {
     */
    private static void createData() {
       // Open a new session and begin a new transaction
-      
       List<Etudiant> etudiants = new LinkedList<>();
       List<Cours> cours = new LinkedList<>();
 
@@ -84,11 +83,10 @@ class App {
         for(Object e : listEtudiants){
             System.out.println("Etudiant : " + ((Etudiant)e).getNom()+" " + ((Etudiant)e).getPrenom());
             for(Cours c : ((Etudiant)e).getCours()){
-                System.out.println("cours : " + c);
+                System.out.println(" - cours : " + c.getTitre());
             }       
         }
     
-     
       // Commit the transaction and close the session
       session.getTransaction().commit();
       session.close();
