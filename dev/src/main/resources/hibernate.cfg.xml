@@ -15,7 +15,7 @@
       <!-- Pour supprimer et recréer le schéma de BD au lancement -->
       <property name="hbm2ddl.auto">create</property>
       <!-- Pour afficher les requêtes SQL en console (debugging) -->
-      <property name="show_sql">true</property>
+      <property name="show_sql">false</property>
    
       <mapping class="ch.heigvd.university.entity.Cours"/>    
       <mapping class="ch.heigvd.university.entity.Etudiant"/>     
