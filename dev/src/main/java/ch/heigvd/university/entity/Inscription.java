@@ -13,37 +13,40 @@ import javax.persistence.*;
 @Entity
 public class Inscription implements java.io.Serializable {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-   @ManyToOne(fetch=FetchType.LAZY)
-   @JoinColumn(name="cours_id", nullable = true)
-   private Cours cours;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cours_id", nullable = true)
+    private Cours cours;
 
-   @ManyToOne(fetch= FetchType.LAZY)
-   @JoinColumn(name="etudiant_id", nullable=true)
-   private Etudiant etudiant;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "etudiant_id", nullable = true)
+    private Etudiant etudiant;
 
-   public Inscription() {
-   }
+    private char grade;
 
-   public Inscription(Cours cours, Etudiant etudiant) {
-      this.cours = cours;
-      this.etudiant = etudiant;
-   }
-   
-   public Cours getCours() {
-      return cours;
-   }
+    public Inscription() {
+    }
 
-   public Etudiant getEtudiant() {
-      return etudiant;
-   }
+    public Inscription(Cours cours, Etudiant etudiant) {
+        this.cours = cours;
+        this.etudiant = etudiant;
+        this.grade = '-';
+    }
 
-   public long getId() {
-      return id;
-   }
+    public Cours getCours() {
+        return cours;
+    }
+
+    public Etudiant getEtudiant() {
+        return etudiant;
+    }
+
+    public long getId() {
+        return id;
+    }
 
     public void setCours(Cours cours) {
         this.cours = cours;
@@ -53,8 +56,16 @@ public class Inscription implements java.io.Serializable {
         this.etudiant = etudiant;
     }
 
-   public void setId(long id) {
-      this.id = id;
-   }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public char getGrade() {
+        return grade;
+    }
+
+    public void setGrade(char grade) {
+        this.grade = grade;
+    }
 
 }

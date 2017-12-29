@@ -2,6 +2,8 @@ package ch.heigvd.university.entity;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
@@ -13,75 +15,104 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.*;
+import org.hibernate.Session;
 
 @Entity
 public class Etudiant implements java.io.Serializable {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-   private String prenom;
+    private String prenom;
 
-   private String nom;
- 
-   @OneToMany(targetEntity = Inscription.class, fetch= FetchType.LAZY,
-           cascade={CascadeType.ALL},mappedBy="etudiant")
-   private Set<Inscription> inscriptions = new HashSet();
+    private String nom;
 
-   @Temporal(TemporalType.DATE)
-   private Date dateInscription;
+    @OneToMany(targetEntity = Inscription.class, fetch = FetchType.LAZY,
+            cascade = {CascadeType.ALL}, mappedBy = "etudiant")
+    private Set<Inscription> inscriptions = new HashSet();
 
-   public Etudiant() {
-   }
+    @Temporal(TemporalType.DATE)
+    private Date dateInscription;
 
-   public Etudiant(String prenom, String nom, Date dateInscription) {
-      this.prenom = prenom;
-      this.nom = nom;
-      this.dateInscription = dateInscription;
-   }
+    public Etudiant() {
+    }
 
-   public void setId(int id) {
-      this.id = id;
-   }
+    public Etudiant(String prenom, String nom, Date dateInscription) {
+        this.prenom = prenom;
+        this.nom = nom;
+        this.dateInscription = dateInscription;
+    }
 
-   public void setPrenom(String prenom) {
-      this.prenom = prenom;
-   }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-   public void setNom(String nom) {
-      this.nom = nom;
-   }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-   public void setDateInscription(Date dateInscription) {
-      this.dateInscription = dateInscription;
-   }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-   public int getId() {
-      return id;
-   }
+    public void setDateInscription(Date dateInscription) {
+        this.dateInscription = dateInscription;
+    }
 
-   public String getNom() {
-      return nom;
-   }
+    public int getId() {
+        return id;
+    }
 
-   public String getPrenom() {
-      return prenom;
-   }
+    public String getNom() {
+        return nom;
+    }
 
-   public Date getDateInscription() {
-      return dateInscription;
-   }
-   
-   public void ajouterCours(Cours cours){
-       inscriptions.add(new Inscription(cours, this));
-   }
-   
-   public Set<Cours> getCours(){
-      Set<Cours> cours = new HashSet();
-       for(Inscription ins : inscriptions){
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public Date getDateInscription() {
+        return dateInscription;
+    }
+
+    public void ajouterCours(Cours cours) {
+        inscriptions.add(new Inscription(cours, this));
+    }
+
+    public Set<Cours> getCours() {
+        Set<Cours> cours = new HashSet();
+        for (Inscription ins : inscriptions) {
             cours.add(ins.getCours());
-       }
-       return cours;
-   }
+        }
+        return cours;
+    }
+
+    public void attribuerGrade(Cours cours, char grade, Session session) {
+        session.beginTransaction();
+        
+        if (getCours().contains(cours)) {
+            for(Inscription i : inscriptions){
+                if(cours.getId() == i.getCours().getId()){
+                    i.setGrade(grade);
+                }
+            }
+            session.getTransaction().commit();
+        } else {
+            session.getTransaction().commit();
+            throw new IllegalAccessError();
+        }       
+    }
+
+    public List<Cours> cousNomCredites(Session session) {
+        session.beginTransaction();
+        List<Cours> listCours = new LinkedList<>();
+        for (Inscription i : inscriptions) {
+            if (i.getGrade() == '-') {
+                listCours.add(i.getCours());
+            }
+        }
+        session.getTransaction().commit();
+        return listCours;
+    }
 }

@@ -1,6 +1,8 @@
 package ch.heigvd.university.entity;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
@@ -9,59 +11,72 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.*;
+import org.hibernate.Session;
 
 @Entity
 public class Cours implements java.io.Serializable {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-   private String titre;
+    private String titre;
 
-   private int credits;
-   
-   @OneToMany(targetEntity=Inscription.class, fetch= FetchType.LAZY,
-           cascade={CascadeType.ALL},mappedBy="etudiant")
-   private Set<Inscription> inscriptions = new HashSet();
+    private int credits;
 
-   public Cours() {
-   }
+    @OneToMany(targetEntity = Inscription.class, fetch = FetchType.LAZY,
+            cascade = {CascadeType.ALL}, mappedBy = "cours")
+    private Set<Inscription> inscriptions = new HashSet();
 
-   public Cours(String titre, int credits) {
-      this.titre = titre;
-      this.credits = credits;
-   }
+    public Cours() {
+    }
 
-   public void setId(int id) {
-      this.id = id;
-   }
+    public Cours(String titre, int credits) {
+        this.titre = titre;
+        this.credits = credits;
+    }
 
-   public void setTitre(String titre) {
-      this.titre = titre;
-   }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-   public void setCredits(int credits) {
-      this.credits = credits;
-   }
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
 
-   public int getCredits() {
-      return credits;
-   }
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
 
-   public String getTitre() {
-      return titre;
-   }
+    public int getCredits() {
+        return credits;
+    }
 
-   public int getId() {
-      return id;
-   }
-   
-   public Set<Etudiant> getEtudiants(){
-       Set<Etudiant> etudiants = new HashSet();
-       for(Inscription ins : inscriptions){
-           etudiants.add(ins.getEtudiant());
-       }
-       return etudiants;
-   }
+    public String getTitre() {
+        return titre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Set<Etudiant> getEtudiants() {
+        Set<Etudiant> etudiants = new HashSet();
+        for (Inscription ins : inscriptions) {
+            etudiants.add(ins.getEtudiant());
+        }
+        return etudiants;
+    }
+
+    public List<Etudiant> etudiantsEnAttente(Session session) {
+        List<Etudiant> list = new LinkedList<>();
+        session.beginTransaction();
+        for (Inscription i : inscriptions) {
+            if (i.getGrade() == '-') {
+                list.add(i.getEtudiant());
+            }
+        }
+        session.getTransaction().commit();
+        return list;
+    }
 }
