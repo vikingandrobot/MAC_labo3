@@ -243,8 +243,16 @@ class App {
         displayCours((List<Cours>) cours);
         
         System.out.println("\nListe des étudiants et leurs cours");
-        List listEtudiants = session.createQuery("FROM Etudiant").list();
+        List<Etudiant> listEtudiants = session.createQuery("FROM Etudiant").list();
         displayStudentAndCours(etudiants);
+        
+        System.out.println("Liste des enseignants de chaque étudiant");
+        for(Etudiant e : listEtudiants) {
+           System.out.println("L'étudiant " + e.getNom() + " a comme professeur : ");
+           for(Enseignant enseignant : e.getEnseignants()) {
+              System.out.println(enseignant);
+           }
+        }
         
         session.close();
        }

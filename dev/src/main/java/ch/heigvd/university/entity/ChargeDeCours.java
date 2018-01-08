@@ -34,6 +34,7 @@ public class ChargeDeCours implements Enseignant {
       this.sigle = sigle;
    }
 
+   @Override
    public String toString() {
       return "Charger de cours : " + nom + " " + prenom + " sigle: " + sigle;
    }

@@ -116,6 +116,20 @@ public class Etudiant implements java.io.Serializable {
         return listCours;
     }
     
+    public List<Enseignant> getEnseignants() {
+       List<Enseignant> enseignants = new LinkedList<>();
+       
+       for(Cours c : getCours()) {
+          
+          Enseignant e = c.getEnseignant();
+          if(e != null) {
+             enseignants.add(c.getEnseignant());
+          }
+       }
+       
+       return enseignants;
+    }
+    
     @Override
     public String toString(){
         return "nom: " + nom + " prénom: " + prenom;

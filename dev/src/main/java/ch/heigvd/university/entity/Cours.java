@@ -78,6 +78,10 @@ public class Cours implements java.io.Serializable {
    public int getId() {
       return id;
    }
+   
+   public Enseignant getEnseignant() {
+      return enseignant;
+   }
 
    public Set<Etudiant> getEtudiants() {
       Set<Etudiant> etudiants = new HashSet();
