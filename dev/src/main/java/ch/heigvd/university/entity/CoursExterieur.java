@@ -15,7 +15,7 @@ public class CoursExterieur extends Cours{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
      
-    String ecole;
+    private String ecole;
     
     public CoursExterieur(){
         super();
@@ -23,6 +23,11 @@ public class CoursExterieur extends Cours{
     
    public CoursExterieur(String titre, int credits, String ecole){
        super(titre, credits);
+       this.ecole = ecole;
+   }
+   
+   public CoursExterieur(String titre, int credits, Enseignant enseignant, String ecole){
+       super(titre, credits, enseignant);
        this.ecole = ecole;
    }
    

@@ -24,6 +24,8 @@ public class Cours implements java.io.Serializable {
     private String titre;
 
     private int credits;
+    
+    private Enseignant enseignant;
 
     @OneToMany(targetEntity = Inscription.class, fetch = FetchType.LAZY,
             cascade = {CascadeType.ALL}, mappedBy = "cours")
@@ -35,6 +37,12 @@ public class Cours implements java.io.Serializable {
     public Cours(String titre, int credits) {
         this.titre = titre;
         this.credits = credits;
+    }
+    
+    public Cours(String titre, int credits, Enseignant enseignant){
+        this.titre = titre;
+        this.credits = credits;
+        this.enseignant = enseignant;
     }
 
     public void setId(int id) {
@@ -81,7 +89,8 @@ public class Cours implements java.io.Serializable {
         return list;
     }
     
+    @Override
     public String toString(){
-        return "Id: " + id + " nom: " + titre + " credits: "+ credits;
+        return "Id: " + id + " nom: " + titre + " credits: "+ credits + (enseignant != null ? " enseignant:"+ enseignant : "");
     }
 }

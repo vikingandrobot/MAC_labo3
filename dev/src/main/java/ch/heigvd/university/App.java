@@ -1,9 +1,12 @@
 package ch.heigvd.university;
 
+import ch.heigvd.university.entity.ChargeDeCours;
 import ch.heigvd.university.entity.Cours;
 import ch.heigvd.university.entity.CoursExterieur;
+import ch.heigvd.university.entity.Enseignant;
 import ch.heigvd.university.entity.Etudiant;
 import ch.heigvd.university.entity.Inscription;
+import ch.heigvd.university.entity.Professeur;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,6 +76,7 @@ class App {
         List<Etudiant> etudiants = new LinkedList<>();
         List<Cours> cours = new LinkedList<>();
         List<CoursExterieur> coursExterieur = new LinkedList<>();
+        List<Enseignant> enseignants = new LinkedList<>();
         
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -86,8 +90,13 @@ class App {
             session.save(cours.get(i));
         }
         
-        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[0], 2, ECOLE[0]));
-        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[1], 3, ECOLE[1]));
+        enseignants.add(new Professeur("Pr. Dupont"));
+        enseignants.add(new ChargeDeCours("Pierre", "Jack", "PJ"));
+        session.save(enseignants.get(0));
+        session.save(enseignants.get(1));
+        
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[0], 2, enseignants.get(0), ECOLE[0]));
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[1], 3, enseignants.get(1), ECOLE[1]));
         session.save(coursExterieur.get(0));
         session.save(coursExterieur.get(1));
         
@@ -101,6 +110,8 @@ class App {
         
         etudiants.get(1).ajouterCours(coursExterieur.get(0));
         etudiants.get(2).ajouterCours(coursExterieur.get(1));
+        
+      
         
         // Commit the transaction and close the session
         session.getTransaction().commit();

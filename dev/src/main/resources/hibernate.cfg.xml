@@ -21,5 +21,8 @@
       <mapping class="ch.heigvd.university.entity.Etudiant"/>     
       <mapping class="ch.heigvd.university.entity.Inscription"/>    
       <mapping class="ch.heigvd.university.entity.CoursExterieur"/> 
+      <mapping class="ch.heigvd.university.entity.Enseignant"/>
+      <mapping class="ch.heigvd.university.entity.Professeur"/> 
+      <mapping class="ch.heigvd.university.entity.ChargeDeCours"/> 
    </session-factory> 
 </hibernate-configuration>
