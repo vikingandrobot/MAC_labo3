@@ -16,23 +16,22 @@ import javax.persistence.Id;
  */
 @Entity
 public class Professeur implements Enseignant {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-     
-     private String nomComplet;
-     
-     public Professeur(){
-     }
 
-    public Professeur( String nomComplet) {
-        this.nomComplet = nomComplet;
-    }
-     
-    @Override
-    public String toString(){
-        return "Professeur : " + nomComplet ;
-    } 
-    
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
+
+   private String nomComplet;
+
+   public Professeur() {
+   }
+
+   public Professeur(String nomComplet) {
+      this.nomComplet = nomComplet;
+   }
+
+   @Override
+   public String toString() {
+      return "Professeur : " + nomComplet;
+   }
 }

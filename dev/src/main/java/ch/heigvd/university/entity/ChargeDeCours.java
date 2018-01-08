@@ -15,26 +15,26 @@ import javax.persistence.Id;
  * @author User
  */
 @Entity
-public class ChargeDeCours implements Enseignant{
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-     
-    private String prenom;
-    private String nom;
-    private String sigle;
+public class ChargeDeCours implements Enseignant {
 
-    public ChargeDeCours() {
-    }
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
 
-    public ChargeDeCours(String prenom, String nom, String sigle) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.sigle = sigle;
-    }
-   
-    public String toString(){
-        return "Charger de cours : " + nom + " " + prenom + " sigle: " + sigle;
-    }
+   private String prenom;
+   private String nom;
+   private String sigle;
+
+   public ChargeDeCours() {
+   }
+
+   public ChargeDeCours(String prenom, String nom, String sigle) {
+      this.prenom = prenom;
+      this.nom = nom;
+      this.sigle = sigle;
+   }
+
+   public String toString() {
+      return "Charger de cours : " + nom + " " + prenom + " sigle: " + sigle;
+   }
 }
