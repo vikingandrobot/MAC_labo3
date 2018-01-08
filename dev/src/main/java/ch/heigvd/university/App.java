@@ -232,8 +232,8 @@ class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         
-        System.out.append("\n********** ETAPE 3 **********\n");
-         List etudiants = session.createQuery("FROM Etudiant").list();
+        System.out.append("\n********** ETAPE 4 **********\n");
+        List etudiants = session.createQuery("FROM Etudiant").list();
          
         System.out.println("\nListe des étudiants : ");
         displayStudent(etudiants);
