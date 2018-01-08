@@ -35,6 +35,6 @@ public class ChargeDeCours implements Enseignant {
    }
 
    public String toString() {
-      return "Charger de cours : " + nom + " " + prenom + " sigle: " + sigle;
+      return "Charger de cours: " + nom + " " + prenom + " sigle: " + sigle;
    }
 }
