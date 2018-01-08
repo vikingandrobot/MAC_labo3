@@ -63,7 +63,7 @@ class App {
     private static final String[] NOMS = {"De la Vega", "Carlson", "PantHurth"};
     private static final String[] PRENOMS = {"Marie", "Carl", "John"};
     private static final String[] COURS = {"Bio Alchemy", "Star Flying", "Magic"};
-    private static final String[] COURS_EXTERIEUR = {"Botanic", "Chirurgie"};
+    private static final String[] COURS_EXTERIEUR = {"Botanic", "Chirurgie","Theatre"};
     private static final String[] ECOLE = {"Ecole de la fleurs", "Ecole du bistouri"};
     
     private static SessionFactory sessionFactory;
@@ -96,9 +96,13 @@ class App {
         session.save(enseignants.get(1));
         
         coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[0], 2, enseignants.get(0), ECOLE[0]));
-        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[1], 3, enseignants.get(1), ECOLE[1]));
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[1], 2, enseignants.get(0), ECOLE[1]));
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[2], 2, enseignants.get(1), ECOLE[1]));
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[2], 3, enseignants.get(0), ECOLE[0]));
         session.save(coursExterieur.get(0));
         session.save(coursExterieur.get(1));
+        session.save(coursExterieur.get(2));
+        session.save(coursExterieur.get(3));
         
         etudiants.get(0).ajouterCours(cours.get(0));
         etudiants.get(0).ajouterCours(cours.get(1));
@@ -109,10 +113,11 @@ class App {
         etudiants.get(2).ajouterCours(cours.get(1));
         
         etudiants.get(1).ajouterCours(coursExterieur.get(0));
+        etudiants.get(1).ajouterCours(coursExterieur.get(1));
+        etudiants.get(1).ajouterCours(coursExterieur.get(2));
+        etudiants.get(1).ajouterCours(coursExterieur.get(3));
         etudiants.get(2).ajouterCours(coursExterieur.get(1));
-        
-      
-        
+         
         // Commit the transaction and close the session
         session.getTransaction().commit();
         session.close();
@@ -246,12 +251,13 @@ class App {
         List<Etudiant> listEtudiants = session.createQuery("FROM Etudiant").list();
         displayStudentAndCours(etudiants);
         
-        System.out.println("Liste des enseignants de chaque étudiant");
+        System.out.println("*** Liste des enseignants de chaque étudiant\n");
         for(Etudiant e : listEtudiants) {
            System.out.println("L'étudiant " + e.getNom() + " a comme professeur : ");
            for(Enseignant enseignant : e.getEnseignants()) {
               System.out.println(enseignant);
            }
+           System.out.println("");
         }
         
         session.close();
