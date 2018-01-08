@@ -14,6 +14,7 @@ import javax.persistence.*;
 import org.hibernate.Session;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Cours implements java.io.Serializable {
 
     @Id
@@ -78,5 +79,9 @@ public class Cours implements java.io.Serializable {
         }
         session.getTransaction().commit();
         return list;
+    }
+    
+    public String toString(){
+        return "Id: " + id + " nom: " + titre + " credits: "+ credits;
     }
 }

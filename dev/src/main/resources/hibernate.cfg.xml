@@ -19,6 +19,7 @@
    
       <mapping class="ch.heigvd.university.entity.Cours"/>    
       <mapping class="ch.heigvd.university.entity.Etudiant"/>     
-      <mapping class="ch.heigvd.university.entity.Inscription"/>     
+      <mapping class="ch.heigvd.university.entity.Inscription"/>    
+      <mapping class="ch.heigvd.university.entity.CoursExterieur"/> 
    </session-factory> 
 </hibernate-configuration>

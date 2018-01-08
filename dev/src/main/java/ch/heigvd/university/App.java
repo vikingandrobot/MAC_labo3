@@ -1,13 +1,13 @@
 package ch.heigvd.university;
 
 import ch.heigvd.university.entity.Cours;
+import ch.heigvd.university.entity.CoursExterieur;
 import ch.heigvd.university.entity.Etudiant;
 import ch.heigvd.university.entity.Inscription;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.TypedQuery;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,34 +17,32 @@ class App {
     
     public static void displayStudent(List<Etudiant> etudiants) {
         for (Etudiant e : etudiants) {
-            System.out.println("*** " + e.getNom()
-                    + " " + e.getPrenom());
+            System.out.println("*** " + e);
         }
     }
     public static void displayStudent(Set<Etudiant> etudiants) {
         for (Etudiant e : etudiants) {
-            System.out.println("*** " + e.getNom()
-                    + " " + e.getPrenom());
+            System.out.println("*** " + e);
         }
     }
     
     public static void displayStudentAndCours(List<Etudiant> etudiants) {
         for (Etudiant e : etudiants) {
-            System.out.println("*** " + e.getNom()
-                    + " " + e.getPrenom() + "\nCours : ");
+            System.out.println("*** " + e + "\nCours : ");
             displayCours(e.getCours());
+            System.out.println("");
         }
     }
     
     public static void displayCours(List<Cours> cours) {
         for (Cours c : cours) {
-            System.out.println("- id:" + c.getId() + " name:" + c.getTitre() + " credits:" + c.getCredits());
+            System.out.println("- " + c);
         }
     }
     
     public static void displayCours(Set<Cours> cours) {
         for (Cours c : cours) {
-            System.out.println("- id:" + c.getId() + " name:" + c.getTitre() + " credits:" + c.getCredits());
+            System.out.println("- " + c);
         }
     }
     
@@ -52,8 +50,8 @@ class App {
         for (Inscription i : inscriptions) {
             System.out.println(
                     "id: " + i.getId()
-                    + " cours: <" + i.getCours().getId() + " " + i.getCours().getTitre() + ">"
-                    + " etudiant: <" + i.getEtudiant().getId() + " " + i.getEtudiant().getNom() + ">"
+                    + " cours: <" + i.getCours()+ ">"
+                    + " etudiant: <" + i.getEtudiant() + ">"
                     + " grade: <" + i.getGrade() + ">"
             );
         }
@@ -62,6 +60,8 @@ class App {
     private static final String[] NOMS = {"De la Vega", "Carlson", "PantHurth"};
     private static final String[] PRENOMS = {"Marie", "Carl", "John"};
     private static final String[] COURS = {"Bio Alchemy", "Star Flying", "Magic"};
+    private static final String[] COURS_EXTERIEUR = {"Botanic", "Chirurgie"};
+    private static final String[] ECOLE = {"Ecole de la fleurs", "Ecole du bistouri"};
     
     private static SessionFactory sessionFactory;
 
@@ -72,6 +72,7 @@ class App {
         // Open a new session and begin a new transaction
         List<Etudiant> etudiants = new LinkedList<>();
         List<Cours> cours = new LinkedList<>();
+        List<CoursExterieur> coursExterieur = new LinkedList<>();
         
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -85,6 +86,11 @@ class App {
             session.save(cours.get(i));
         }
         
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[0], 2, ECOLE[0]));
+        coursExterieur.add(new CoursExterieur(COURS_EXTERIEUR[1], 3, ECOLE[1]));
+        session.save(coursExterieur.get(0));
+        session.save(coursExterieur.get(1));
+        
         etudiants.get(0).ajouterCours(cours.get(0));
         etudiants.get(0).ajouterCours(cours.get(1));
         etudiants.get(0).ajouterCours(cours.get(2));
@@ -92,7 +98,10 @@ class App {
         etudiants.get(1).ajouterCours(cours.get(1));
         etudiants.get(2).ajouterCours(cours.get(2));
         etudiants.get(2).ajouterCours(cours.get(1));
-
+        
+        etudiants.get(1).ajouterCours(coursExterieur.get(0));
+        etudiants.get(2).ajouterCours(coursExterieur.get(1));
+        
         // Commit the transaction and close the session
         session.getTransaction().commit();
         session.close();
@@ -208,6 +217,27 @@ class App {
         session.close();
     }
 
+       public static void testEtape4() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        
+        System.out.append("\n********** ETAPE 3 **********\n");
+         List etudiants = session.createQuery("FROM Etudiant").list();
+         
+        System.out.println("\nListe des étudiants : ");
+        displayStudent(etudiants);
+        
+        System.out.println("\nListe des cours : ");
+        List cours = session.createQuery("FROM Cours").list();
+        displayCours((List<Cours>) cours);
+        
+        System.out.println("\nListe des étudiants et leurs cours");
+        List listEtudiants = session.createQuery("FROM Etudiant").list();
+        displayStudentAndCours(etudiants);
+        
+        session.close();
+       }
+       
     /**
      * Main program. Creates a bunch of students and courses in the DB, and then
      * display them back in the console after reading them from the DB.
@@ -229,6 +259,7 @@ class App {
         readData();
         deleteData();
         testEtape3();
+        testEtape4();
         
         System.out.println("\n");
         sessionFactory.close();

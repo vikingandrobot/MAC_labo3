@@ -115,4 +115,9 @@ public class Etudiant implements java.io.Serializable {
         session.getTransaction().commit();
         return listCours;
     }
+    
+    @Override
+    public String toString(){
+        return "nom: " + nom + " prénom: " + prenom;
+    }
 }
