@@ -32,6 +32,6 @@ public class Professeur implements Enseignant {
 
    @Override
    public String toString() {
-      return "Professeur : " + nomComplet;
+      return "Professeur: " + nomComplet;
    }
 }

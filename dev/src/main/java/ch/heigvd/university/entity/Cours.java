@@ -105,6 +105,6 @@ public class Cours implements java.io.Serializable {
 
    @Override
    public String toString() {
-      return "Id: " + id + " nom: " + titre + " credits: " + credits + (enseignant != null ? " enseignant:" + enseignant : "");
+      return "Id: " + getId() + " nom: " + titre + " credits: " + credits + (enseignant != null ? " enseignant: " + enseignant : "");
    }
 }

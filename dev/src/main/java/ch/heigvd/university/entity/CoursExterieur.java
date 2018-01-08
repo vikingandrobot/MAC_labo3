@@ -32,6 +32,11 @@ public class CoursExterieur extends Cours{
    }
    
    @Override
+   public int getId(){
+    return id;
+   }
+   
+   @Override
    public String toString(){
        return super.toString() + " ecole: " + ecole;
    }
