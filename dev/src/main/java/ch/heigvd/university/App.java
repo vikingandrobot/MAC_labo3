@@ -185,7 +185,7 @@ class App {
         session.getTransaction().commit();
                 
         System.out.println("\nListe des cours sans note pour " + etudiant.getNom());
-        displayCours(etudiant.cousNomCredites(session));
+        displayCours(etudiant.coursNonCredites(session));
                
         System.out.println("\nAttribution de la note 5 pour le cours" + cours.get(0).getTitre());
         etudiant.attribuerGrade(cours.get(0), '5', session);

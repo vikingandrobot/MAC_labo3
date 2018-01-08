@@ -104,7 +104,7 @@ public class Etudiant implements java.io.Serializable {
         }       
     }
 
-    public List<Cours> cousNomCredites(Session session) {
+    public List<Cours> coursNonCredites(Session session) {
         session.beginTransaction();
         List<Cours> listCours = new LinkedList<>();
         for (Inscription i : inscriptions) {
