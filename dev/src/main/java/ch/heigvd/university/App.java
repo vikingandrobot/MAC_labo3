@@ -31,7 +31,7 @@ class App {
     
     public static void displayStudentAndCours(List<Etudiant> etudiants) {
         for (Etudiant e : etudiants) {
-            System.out.println("*** " + e + "\nCours : ");
+            System.out.println("*** Etudiant - " + e + "\nCours : ");
             displayCours(e.getCours());
             System.out.println("");
         }
@@ -59,7 +59,7 @@ class App {
             );
         }
     }
-    
+        
     private static final String[] NOMS = {"De la Vega", "Carlson", "PantHurth"};
     private static final String[] PRENOMS = {"Marie", "Carl", "John"};
     private static final String[] COURS = {"Bio Alchemy", "Star Flying", "Magic"};
@@ -254,8 +254,9 @@ class App {
         System.out.println("*** Liste des enseignants de chaque étudiant\n");
         for(Etudiant e : listEtudiants) {
            System.out.println("L'étudiant " + e.getNom() + " a comme professeur : ");
-           for(Enseignant enseignant : e.getEnseignants()) {
-              System.out.println(enseignant);
+       
+           for(Enseignant ens : e.getEnseignants(session)){
+               System.out.println(ens);
            }
            System.out.println("");
         }
@@ -286,7 +287,6 @@ class App {
         testEtape3();
         testEtape4();
         
-        System.out.println("\n");
         sessionFactory.close();
     }
 }

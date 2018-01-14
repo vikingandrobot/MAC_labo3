@@ -1,5 +1,6 @@
 package ch.heigvd.university.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -116,7 +117,7 @@ public class Etudiant implements java.io.Serializable {
         return listCours;
     }
     
-    public List<Enseignant> getEnseignants() {
+   /* public List<Enseignant> getEnseignants() {
        List<Enseignant> enseignants = new LinkedList<>();
        
        for(Cours c : getCours()) {
@@ -127,6 +128,24 @@ public class Etudiant implements java.io.Serializable {
           }
        }
        
+       return enseignants;
+    }
+    */
+     public List<Enseignant> getEnseignants(Session session) {
+       List<Enseignant> enseignants = new LinkedList<>();
+       /*une fonction getEnseignants qui retournera la liste des enseignants 
+       subis par l’étudiant qui reçoit le message*/
+       List<Cours> cours = 
+              session.createQuery("Select c"
+              + " from Etudiant as e "
+              + " join e.inscriptions as i with e.id = "+ getId()
+              + " join i.cours as c with c.enseignant != null "
+              + " group by c.enseignant"
+              ).list();
+       
+        for(Cours c : cours){
+           enseignants.add(c.getEnseignant());
+        }
        return enseignants;
     }
     
