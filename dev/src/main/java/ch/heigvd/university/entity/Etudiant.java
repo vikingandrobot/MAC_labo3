@@ -116,21 +116,7 @@ public class Etudiant implements java.io.Serializable {
         session.getTransaction().commit();
         return listCours;
     }
-    
-   /* public List<Enseignant> getEnseignants() {
-       List<Enseignant> enseignants = new LinkedList<>();
-       
-       for(Cours c : getCours()) {
-          
-          Enseignant e = c.getEnseignant();
-          if(e != null) {
-             enseignants.add(c.getEnseignant());
-          }
-       }
-       
-       return enseignants;
-    }
-    */
+  
      public List<Enseignant> getEnseignants(Session session) {
        List<Enseignant> enseignants = new LinkedList<>();
        /*une fonction getEnseignants qui retournera la liste des enseignants 

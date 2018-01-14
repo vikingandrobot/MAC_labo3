@@ -18,11 +18,11 @@ public class Inscription implements java.io.Serializable {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cours_id", nullable = true)
+    @JoinColumn(name = "cours_id", nullable = false)
     private Cours cours;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "etudiant_id", nullable = true)
+    @JoinColumn(name = "etudiant_id", nullable = false)
     private Etudiant etudiant;
 
     private char grade;
