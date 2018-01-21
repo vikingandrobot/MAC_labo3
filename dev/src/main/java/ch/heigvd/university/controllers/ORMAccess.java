@@ -21,6 +21,7 @@ import org.hibernate.HibernateException;
 
 import ch.heigvd.university.models.*;
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 //------------------------------------------------------------------------------
 public class ORMAccess {
@@ -28,6 +29,8 @@ public class ORMAccess {
     @SuppressWarnings("all")
 
     private static SessionFactory sessionFactory;
+    
+    private List<Etudiant> etudiants;
 
     private static final String[] NOMS = {"De la Vega", "Carlson", "PantHurth"};
     private static final String[] PRENOMS = {"Marie", "Carl", "John"};
@@ -49,7 +52,8 @@ public class ORMAccess {
             tx = session.beginTransaction();
 
             for (int i = 0; i < 3; ++i) {
-                session.save(new Etudiant(PRENOMS[i], NOMS[i], LocalDate.now()));
+                Etudiant e = new Etudiant(PRENOMS[i], NOMS[i], LocalDate.now());
+                session.save(e);
             }
 
             tx.commit();
@@ -80,6 +84,9 @@ public class ORMAccess {
         try {
 
             tx = session.beginTransaction();
+            
+            Query query = session.createQuery("select e from Etudiant as e"); 
+            etudiants = query.list();
 
             // COMPLETER A CET ENDROIT
             tx.commit();
