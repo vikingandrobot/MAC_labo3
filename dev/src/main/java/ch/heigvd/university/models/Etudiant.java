@@ -1,5 +1,6 @@
-package ch.heigvd.university.entity;
+package ch.heigvd.university.models;
 
+import ch.heigvd.university.entity.Enseignant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.heigvd.university.entity;
+package ch.heigvd.university.models;
 
+import ch.heigvd.university.entity.Enseignant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,27 +16,23 @@ import javax.persistence.Id;
  * @author User
  */
 @Entity
-public class ChargeDeCours implements Enseignant {
+public class Professeur implements Enseignant {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
 
-   private String prenom;
-   private String nom;
-   private String sigle;
+   private String nomComplet;
 
-   public ChargeDeCours() {
+   public Professeur() {
    }
 
-   public ChargeDeCours(String prenom, String nom, String sigle) {
-      this.prenom = prenom;
-      this.nom = nom;
-      this.sigle = sigle;
+   public Professeur(String nomComplet) {
+      this.nomComplet = nomComplet;
    }
 
    @Override
    public String toString() {
-      return "Charger de cours: " + nom + " " + prenom + " sigle: " + sigle;
+      return "Professeur: " + nomComplet;
    }
 }

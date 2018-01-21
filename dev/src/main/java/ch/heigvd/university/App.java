@@ -1,12 +1,12 @@
 package ch.heigvd.university;
 
-import ch.heigvd.university.entity.ChargeDeCours;
-import ch.heigvd.university.entity.Cours;
-import ch.heigvd.university.entity.CoursExterieur;
+import ch.heigvd.university.models.ChargeDeCours;
+import ch.heigvd.university.models.Cours;
+import ch.heigvd.university.models.CoursExterieur;
 import ch.heigvd.university.entity.Enseignant;
-import ch.heigvd.university.entity.Etudiant;
-import ch.heigvd.university.entity.Inscription;
-import ch.heigvd.university.entity.Professeur;
+import ch.heigvd.university.models.Etudiant;
+import ch.heigvd.university.models.Inscription;
+import ch.heigvd.university.models.Professeur;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;

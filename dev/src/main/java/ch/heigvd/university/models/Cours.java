@@ -1,5 +1,6 @@
-package ch.heigvd.university.entity;
+package ch.heigvd.university.models;
 
+import ch.heigvd.university.entity.Enseignant;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;

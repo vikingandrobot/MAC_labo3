@@ -1,6 +1,7 @@
 
-package ch.heigvd.university.entity;
+package ch.heigvd.university.models;
 
+import ch.heigvd.university.entity.Enseignant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

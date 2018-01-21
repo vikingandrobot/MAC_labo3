@@ -1,4 +1,4 @@
-package ch.heigvd.university.entity;
+package ch.heigvd.university.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
