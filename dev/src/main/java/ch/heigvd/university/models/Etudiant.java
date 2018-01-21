@@ -32,7 +32,6 @@ public class Etudiant implements java.io.Serializable {
             cascade = {CascadeType.ALL}, mappedBy = "etudiant")
     private Set<Inscription> inscriptions = new HashSet();
 
-    @Temporal(TemporalType.DATE)
     private LocalDate dateInscription;
 
     public Etudiant() {
