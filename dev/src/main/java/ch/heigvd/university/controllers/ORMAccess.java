@@ -181,8 +181,9 @@ public class ORMAccess {
         try {
 
             tx = session.beginTransaction();
-
-            // COMPLETER A CET ENDROIT
+            
+            session.update(etudiant);
+            
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
