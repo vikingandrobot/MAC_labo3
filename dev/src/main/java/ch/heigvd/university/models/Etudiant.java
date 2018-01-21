@@ -33,6 +33,9 @@ public class Etudiant implements java.io.Serializable {
     private Set<Inscription> inscriptions = new HashSet();
 
     private LocalDate dateInscription;
+    
+    @Version
+    private int version;
 
     public Etudiant() {
     }
@@ -75,6 +78,14 @@ public class Etudiant implements java.io.Serializable {
         return dateInscription;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
     public void ajouterCours(Cours cours) {
         inscriptions.add(new Inscription(cours, this));
     }
@@ -89,10 +100,10 @@ public class Etudiant implements java.io.Serializable {
 
     public void attribuerGrade(Cours cours, char grade, Session session) {
         session.beginTransaction();
-        
+
         if (getCours().contains(cours)) {
-            for(Inscription i : inscriptions){
-                if(cours.getId() == i.getCours().getId()){
+            for (Inscription i : inscriptions) {
+                if (cours.getId() == i.getCours().getId()) {
                     i.setGrade(grade);
                 }
             }
@@ -100,7 +111,7 @@ public class Etudiant implements java.io.Serializable {
         } else {
             session.getTransaction().commit();
             throw new IllegalAccessError();
-        }       
+        }
     }
 
     public List<Cours> coursNonCredites(Session session) {
@@ -114,27 +125,27 @@ public class Etudiant implements java.io.Serializable {
         session.getTransaction().commit();
         return listCours;
     }
-  
-     public List<Enseignant> getEnseignants(Session session) {
-       List<Enseignant> enseignants = new LinkedList<>();
-       /*une fonction getEnseignants qui retournera la liste des enseignants 
+
+    public List<Enseignant> getEnseignants(Session session) {
+        List<Enseignant> enseignants = new LinkedList<>();
+        /*une fonction getEnseignants qui retournera la liste des enseignants 
        subis par l’étudiant qui reçoit le message*/
-       List<Cours> cours = 
-              session.createQuery("Select c"
-              + " from Etudiant as e "
-              + " join e.inscriptions as i with e.id = "+ getId()
-              + " join i.cours as c with c.enseignant != null "
-              + " group by c.enseignant"
-              ).list();
-       
-        for(Cours c : cours){
-           enseignants.add(c.getEnseignant());
+        List<Cours> cours
+                = session.createQuery("Select c"
+                        + " from Etudiant as e "
+                        + " join e.inscriptions as i with e.id = " + getId()
+                        + " join i.cours as c with c.enseignant != null "
+                        + " group by c.enseignant"
+                ).list();
+
+        for (Cours c : cours) {
+            enseignants.add(c.getEnseignant());
         }
-       return enseignants;
+        return enseignants;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "nom: " + nom + " prénom: " + prenom;
     }
 }
