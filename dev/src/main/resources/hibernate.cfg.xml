@@ -17,12 +17,12 @@
       <!-- Pour afficher les requêtes SQL en console (debugging) -->
       <property name="show_sql">false</property>
    
-      <mapping class="ch.heigvd.university.entity.Cours"/>    
-      <mapping class="ch.heigvd.university.entity.Etudiant"/>     
-      <mapping class="ch.heigvd.university.entity.Inscription"/>    
-      <mapping class="ch.heigvd.university.entity.CoursExterieur"/> 
+      <mapping class="ch.heigvd.university.models.Cours"/>    
+      <mapping class="ch.heigvd.university.models.Etudiant"/>     
+      <mapping class="ch.heigvd.university.models.Inscription"/>    
+      <mapping class="ch.heigvd.university.models.CoursExterieur"/> 
       <mapping class="ch.heigvd.university.entity.Enseignant"/>
-      <mapping class="ch.heigvd.university.entity.Professeur"/> 
-      <mapping class="ch.heigvd.university.entity.ChargeDeCours"/> 
+      <mapping class="ch.heigvd.university.models.Professeur"/> 
+      <mapping class="ch.heigvd.university.models.ChargeDeCours"/> 
    </session-factory> 
 </hibernate-configuration>

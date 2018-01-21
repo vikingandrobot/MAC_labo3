@@ -1,8 +1,7 @@
 package ch.heigvd.university.models;
 
 import ch.heigvd.university.entity.Enseignant;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,12 +33,12 @@ public class Etudiant implements java.io.Serializable {
     private Set<Inscription> inscriptions = new HashSet();
 
     @Temporal(TemporalType.DATE)
-    private Date dateInscription;
+    private LocalDate dateInscription;
 
     public Etudiant() {
     }
 
-    public Etudiant(String prenom, String nom, Date dateInscription) {
+    public Etudiant(String prenom, String nom, LocalDate dateInscription) {
         this.prenom = prenom;
         this.nom = nom;
         this.dateInscription = dateInscription;
@@ -58,7 +56,7 @@ public class Etudiant implements java.io.Serializable {
         this.nom = nom;
     }
 
-    public void setDateInscription(Date dateInscription) {
+    public void setDateInscription(LocalDate dateInscription) {
         this.dateInscription = dateInscription;
     }
 
@@ -74,7 +72,7 @@ public class Etudiant implements java.io.Serializable {
         return prenom;
     }
 
-    public Date getDateInscription() {
+    public LocalDate getDateInscription() {
         return dateInscription;
     }
 

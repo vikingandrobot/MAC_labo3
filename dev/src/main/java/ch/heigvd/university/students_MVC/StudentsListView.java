@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
 
 import ch.heigvd.university.models.*;
-import controllers.StudentsController;
+import ch.heigvd.university.controllers.StudentsController;
 
 public class StudentsListView extends JPanel implements Observer{
 

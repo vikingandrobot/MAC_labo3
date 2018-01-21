@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
 import ch.heigvd.university.models.*;
-import controllers.StudentsController;
+import ch.heigvd.university.controllers.StudentsController;
 
 public class StudentEditView extends JPanel{
 

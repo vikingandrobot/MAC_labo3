@@ -7,7 +7,7 @@ import ch.heigvd.university.entity.Enseignant;
 import ch.heigvd.university.models.Etudiant;
 import ch.heigvd.university.models.Inscription;
 import ch.heigvd.university.models.Professeur;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -83,7 +83,7 @@ class App {
 
         // Create a bunch of students and courses
         for (int i = 0; i < 3; ++i) {
-            etudiants.add(new Etudiant(PRENOMS[i], NOMS[i], new Date()));
+            etudiants.add(new Etudiant(PRENOMS[i], NOMS[i], LocalDate.now()));
             session.save(etudiants.get(i));
             
             cours.add(new Cours(COURS[i], (i + 1) * 2));

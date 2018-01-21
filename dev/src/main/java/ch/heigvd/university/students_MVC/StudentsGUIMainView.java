@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import controllers.StudentsController;
+import ch.heigvd.university.controllers.StudentsController;
 
 public class StudentsGUIMainView extends JPanel {
 	

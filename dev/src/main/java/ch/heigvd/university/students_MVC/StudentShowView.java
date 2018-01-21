@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 
 import ch.heigvd.university.models.*;
-import controllers.StudentsController;
+import ch.heigvd.university.controllers.StudentsController;
 
 public class StudentShowView extends JPanel{
 

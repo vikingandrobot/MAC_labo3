@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 
-import controllers.StudentsController;
+import ch.heigvd.university.controllers.StudentsController;
 
 
 public class StudentsGUI {  
