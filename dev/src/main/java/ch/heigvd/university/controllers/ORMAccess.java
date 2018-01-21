@@ -211,8 +211,11 @@ public class ORMAccess {
         try {
 
             tx = session.beginTransaction();
-
-            // COMPLETER A CET ENDROIT
+            
+            Query q = session.createQuery("delete Etudiant where id = :id")
+                    .setParameter("id", studentId);
+            q.executeUpdate();
+            
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
