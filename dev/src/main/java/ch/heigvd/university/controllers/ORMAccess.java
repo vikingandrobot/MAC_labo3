@@ -119,6 +119,8 @@ public class ORMAccess {
         try {
 
             tx = session.beginTransaction();
+            
+            etudiant = (Etudiant) session.get(Etudiant.class, studentId);
 
             // COMPLETER A CET ENDROIT
             tx.commit();
